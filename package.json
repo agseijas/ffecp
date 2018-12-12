@@ -1,0 +1,41 @@
+{
+  "private": true,
+  "version": "0.0.0",
+  "name": "ffecp",
+  "dependencies": {
+    "react": "16.4.1",
+    "react-dom": "16.4.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.1.1",
+    "jest": "^23.6.0",
+    "ts-jest": "*",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "compile": "tsc",
+    "test": "jest --env=node --colors --coverage test"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/__tests__/*.+(ts|tsx|js)"
+    ],
+    "moduleNameMapper": {
+        "^@App/(.*)$": "<rootDir>/src/main/$1",
+        "^lib/(.*)$": "<rootDir>/common/$1"
+      }
+  }
+}
