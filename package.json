@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "name": "ffecp",
   "dependencies": {
-    "react": "16.4.1",
-    "react-dom": "16.4.1"
+    "@types/node": "^10.12.12"
   },
   "devDependencies": {
     "@types/jest": "^23.1.1",
+    "csv-parse": "^4.1.0",
     "jest": "^23.6.0",
     "ts-jest": "*",
     "typescript": "^3.2.2"
@@ -34,8 +34,8 @@
       "**/__tests__/*.+(ts|tsx|js)"
     ],
     "moduleNameMapper": {
-        "^@App/(.*)$": "<rootDir>/src/main/$1",
-        "^lib/(.*)$": "<rootDir>/common/$1"
-      }
+      "^@App/(.*)$": "<rootDir>/src/main/$1",
+      "^lib/(.*)$": "<rootDir>/common/$1"
+    }
   }
 }
