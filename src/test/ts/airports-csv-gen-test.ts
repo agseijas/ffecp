@@ -1,9 +1,9 @@
-import { AirportsLoader } from './../../main/ts/app/airports-loader';
-import { Airport } from './../../main/ts/app/app';
+import { AirportsLoader } from '../../main/ts/app/airports-loader';
+import { Airport } from '../../main/ts/app/app';
 
 describe("IATA airports to gps coordinates list", () => {
     
-    test("Airports loader loads from csv file", done => {
+    test("Airports are asynchronously loaded from csv file", done => {
         const airportsLoader = new AirportsLoader()
 
         const expectLoadsAirportCallback: (airportsMap: Map<String, Airport>) => void = airports => {
