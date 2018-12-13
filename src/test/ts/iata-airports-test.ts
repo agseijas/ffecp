@@ -1,14 +1,22 @@
-import { createReadStream, writeFileSync } from 'fs-extra';
-import parse from 'csv-parse';
-import { Airport } from '../../main/ts/app/app';
-
-const resourcesDir = __dirname + '/../resources';
+import { AirportsLoader } from './../../main/ts/app/airports-loader';
+import { Airport } from './../../main/ts/app/app';
 
 describe("IATA airports to gps coordinates list", () => {
-    const MAD_AIRPORT_GPS_LOCATION = {latitude: 40.492222222, longitude: -3.5716666667, altitude: 1}
     
+    test("Airports loader loads from csv file", done => {
+        const airportsLoader = new AirportsLoader()
 
-    test("Generates airport-locations json from http://www.partow.net/miscellaneous/airportdatabase/ database", done => {
+        const expectLoadsAirportCallback: (airportsMap: Map<String, Airport>) => void = airports => {
+            done();
+            const newLocal = airports.get("MAD");
+            expect(newLocal).toEqual(new Airport({ altitude: 610, latitude: 40.472, longitude: -3.561 }));
+        };
+
+        airportsLoader.load(expectLoadsAirportCallback)
+    });
+
+    /*
+    test("Generates airport-locations json from a database downloaded from http://www.partow.net/miscellaneous/airportdatabase/", done => {
         const parser = parse({ delimiter: ':'});
         let allAirports = "";
         const airportsStream = createReadStream(resourcesDir + '/iata-airports.csv', {encoding: 'utf8'})
@@ -26,11 +34,9 @@ describe("IATA airports to gps coordinates list", () => {
             })
             .on('finish', () => {
                 done()
-                //console.log(allAirports)
                 //uncomment whenever you need to regenerate the list
-                //writeFileSync(resourcesDir + '/airports-locations.csv', allAirports, {encoding: 'utf8'})
+                writeFileSync(resourcesDir + '/airports-locations.csv', allAirports, {encoding: 'utf8'})
             })
-
-        //expect(1).toBe(0);
     });
+    */
 })
