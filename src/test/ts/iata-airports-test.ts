@@ -6,10 +6,10 @@ const resourcesDir = __dirname + '/../resources';
 
 describe("IATA airports to gps coordinates list", () => {
     const MAD_AIRPORT_GPS_LOCATION = {latitude: 40.492222222, longitude: -3.5716666667, altitude: 1}
-    const parser = parse({ delimiter: ':'});
+    
 
-    test("Gets Airport for IATA code", done => {
-
+    test("Generates airport-locations json from http://www.partow.net/miscellaneous/airportdatabase/ database", done => {
+        const parser = parse({ delimiter: ':'});
         let allAirports = "";
         const airportsStream = createReadStream(resourcesDir + '/iata-airports.csv', {encoding: 'utf8'})
             .pipe(parser)
@@ -19,7 +19,8 @@ describe("IATA airports to gps coordinates list", () => {
                 const lat = record[14] as number
                 const lon = record[15] as number
                 if(code !== 'N/A' && !(lat == 0 && lon == 0)){
-                    const iataGPSLocations = code + ';' + alt + ';' + lat + ';' + lon
+                    const iataGPSLocations = [{ "MAD": [0,0,0]}]
+                    //const iataGPSLocations = code + ';' + alt + ';' + lat + ';' + lon
                     allAirports += iataGPSLocations + '\n'
                 }
             })
