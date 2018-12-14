@@ -4,10 +4,12 @@ import parse from 'csv-parse';
 
 const resourcesDir = __dirname + '/../../resources';
 
+export type AirportLoadCallback = (airportsMap: Map<String, Airport>) => void
+
 export class AirportsLoader {
     parser = parse({ delimiter: ";"});
 
-    public load(seedAirports: (airportsMap: Map<String, Airport>) => void){
+    public load(seedAirports: AirportLoadCallback){
 
         const airports = new Map<String, Airport>()
 

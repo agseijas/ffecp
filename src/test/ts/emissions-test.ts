@@ -1,5 +1,5 @@
 import { Flight } from './../../main/ts/app/flights';
-import { AirportsLoader } from './../../main/ts/app/airports-loader';
+import { AirportsLoader, AirportLoadCallback } from './../../main/ts/app/airports-loader';
 import { GPSCoordinate } from './../../main/ts/app/app';
 import { Airport } from '../../main/ts/app/app';
 
@@ -8,7 +8,7 @@ describe("calc milleage for GPS coordinates", () => {
     test("Same location", done => {
         const airportsLoader = new AirportsLoader()
 
-        const airportsAndCheck: (airportsMap: Map<String, Airport>) => void = airports => {
+        const airportsAndCheck : AirportLoadCallback = airports => {
             done();
             const anAirport = airports.get("MAD");
             if(anAirport) {
@@ -23,10 +23,10 @@ describe("calc milleage for GPS coordinates", () => {
         airportsLoader.load(airportsAndCheck)
     });
 
-    test("Madrid Paris distance same altitude", done => {
+    test("Madrid Paris distance", done => {
         const airportsLoader = new AirportsLoader()
 
-        const airportsAndCheck: (airportsMap: Map<String, Airport>) => void = airports => {
+        const airportsAndCheck : AirportLoadCallback = airports => {
             done();
             const anAirport = airports.get("MAD");
             const anotherAirport = airports.get("CDG");
