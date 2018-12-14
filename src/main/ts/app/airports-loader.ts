@@ -7,7 +7,7 @@ export type AirportLoadCallback = (airportsMap: Map<String, Airport>) => void
 export class AirportsLoader {
 
     public load(seedAirports: AirportLoadCallback){
-        const parser = parse(airportscsv, { delimiter: ";", trim: true, skip_empty_lines: true});
+        const parser = parse(airportscsv, { delimiter: ";", trim: true, skip_empty_lines: true });
         const airports = new Map<String, Airport>()
 
         parser
