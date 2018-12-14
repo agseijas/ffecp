@@ -1,5 +1,5 @@
-import { Flight } from '../../main/ts/app/flights';
-import { Airport } from '../../main/ts/app/app';
+import { Flight } from '../src/main/ts/app/flights';
+import { Airport } from '../src/main/ts/app/app';
 
 describe("calc emissions", () => {
     let MAD_AIRPORT = new Airport({latitude: 40.492222222, longitude: -3.5716666667, altitude: 1})

@@ -1,7 +1,5 @@
-import { Flight } from './../../main/ts/app/flights';
-import { AirportsLoader, AirportLoadCallback } from './../../main/ts/app/airports-loader';
-import { GPSCoordinate } from './../../main/ts/app/app';
-import { Airport } from '../../main/ts/app/app';
+import { Flight } from '../src/main/ts/app/flights';
+import { AirportsLoader, AirportLoadCallback } from '../src/main/ts/app/airports-loader';
 
 describe("calc milleage for GPS coordinates", () => {
 

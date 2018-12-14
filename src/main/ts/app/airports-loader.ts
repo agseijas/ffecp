@@ -1,20 +1,16 @@
 import { Airport } from './app';
-import { createReadStream, writeFileSync } from 'fs-extra';
 import parse from 'csv-parse';
-
-const resourcesDir = __dirname + '/../../resources';
+import { airportscsv } from './airports-locations'
 
 export type AirportLoadCallback = (airportsMap: Map<String, Airport>) => void
 
 export class AirportsLoader {
-    parser = parse({ delimiter: ";"});
 
     public load(seedAirports: AirportLoadCallback){
-
+        const parser = parse(airportscsv, { delimiter: ";", trim: true, skip_empty_lines: true});
         const airports = new Map<String, Airport>()
 
-        createReadStream(resourcesDir + '/airports-locations.csv', {encoding: 'utf8'})
-            .pipe(this.parser)
+        parser
             .on('data', record => {
                 const { code, alt, lat, lon } = adapt(record);
                 airports.set(code, new Airport({altitude: alt, latitude: lat, longitude: lon}))

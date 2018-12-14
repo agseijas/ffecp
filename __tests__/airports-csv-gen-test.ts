@@ -1,5 +1,5 @@
-import { AirportsLoader } from '../../main/ts/app/airports-loader';
-import { Airport } from '../../main/ts/app/app';
+import { AirportsLoader } from '../src/main/ts/app/airports-loader';
+import { Airport } from '../src/main/ts/app/app';
 
 describe("IATA airports to gps coordinates list", () => {
     
@@ -19,7 +19,7 @@ describe("IATA airports to gps coordinates list", () => {
     test("Generates airport-locations json from a database downloaded from http://www.partow.net/miscellaneous/airportdatabase/", done => {
         const parser = parse({ delimiter: ':'});
         let allAirports = "";
-        const airportsStream = createReadStream(resourcesDir + '/iata-airports.csv', {encoding: 'utf8'})
+        const airportsStream = createReadStream('./resources/iata-airports.csv', {encoding: 'utf8'})
             .pipe(parser)
             .on('data', record => {
                 const code = record[1] as String
@@ -35,7 +35,8 @@ describe("IATA airports to gps coordinates list", () => {
             .on('finish', () => {
                 done()
                 //uncomment whenever you need to regenerate the list
-                writeFileSync(resourcesDir + '/airports-locations.csv', allAirports, {encoding: 'utf8'})
+                writeFileSync(resourcesDir + '/airports-locations.ts', allAirports, {encoding: 'utf8'})
+                //do not forget to edit the file adding: export const airportscsv = `<having the content csv in between here>`
             })
     });
     */

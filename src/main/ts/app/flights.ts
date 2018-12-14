@@ -6,8 +6,6 @@ export interface Pollutes {
     co2(other: Airport): number
 }
 
-const avgCO2EmissionsPerPassengerPerKmInGrams = 123
-
 export class Flight implements Pollutes{
     from: Airport
     to: Airport
@@ -23,5 +21,6 @@ export class Flight implements Pollutes{
 }
 
 function co2EmissionsInGrams(one: Airport, other: Airport) : number {
+    const avgCO2EmissionsPerPassengerPerKmInGrams = 123
     return one.distanceTo(other.location) * avgCO2EmissionsPerPassengerPerKmInGrams
 }

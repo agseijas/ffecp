@@ -1,4 +1,4 @@
-import { Airport } from '../../main/ts/app/app';
+import { Airport } from '../src/main/ts/app/app';
 
 describe("calc milleage for GPS coordinates", () => {
     let MAD_AIRPORT_GPS_LOCATION = {latitude: 40.492222222, longitude: -3.5716666667, altitude: 1}
