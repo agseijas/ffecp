@@ -1,7 +1,9 @@
 export type GPSCoordinate = {latitude: number, longitude: number, altitude: number}
 
+export type DistanceInKm = number
+
 export interface GPSLocation {
-    distanceTo(other: GPSCoordinate): number
+    distanceTo(other: GPSCoordinate): DistanceInKm
 }
 
 export class Airport implements GPSLocation{
@@ -11,12 +13,12 @@ export class Airport implements GPSLocation{
         this.location = location
     }
 
-    public distanceTo(other: GPSCoordinate): number {
+    public distanceTo(other: GPSCoordinate): DistanceInKm {
         return distanceTwoLocations(this.location, other)
     }
 }
 
-function distanceTwoLocations(one:GPSCoordinate, other:GPSCoordinate) : number{
+function distanceTwoLocations(one:GPSCoordinate, other:GPSCoordinate) : DistanceInKm{
     let R = 6371; // earth's mean radius in km
     let dLat = (one.latitude-other.latitude) * (Math.PI/180);
     let dLon = (one.longitude-other.longitude) * (Math.PI/180);

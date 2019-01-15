@@ -2,8 +2,10 @@ import { Airport } from './app';
 
 //https://en.wikipedia.org/wiki/Fuel_economy_in_aircraft#Airlines
 
+export type CO2GramsPerPaxPerFlight = number
+
 export interface Pollutes {
-    co2(other: Airport): number
+    co2(): CO2GramsPerPaxPerFlight
 }
 
 export class Flight implements Pollutes{
@@ -15,7 +17,7 @@ export class Flight implements Pollutes{
         this.to = to
     }
 
-    public co2(): number {
+    public co2(): CO2GramsPerPaxPerFlight {
         return co2EmissionsInGrams(this.from, this.to);
     }
 }
