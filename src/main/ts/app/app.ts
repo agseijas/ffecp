@@ -14,7 +14,16 @@ export class Airport implements GPSLocation{
     }
 
     public distanceTo(other: GPSCoordinate): DistanceInKm {
-        return distanceTwoLocations(this.location, other)
+        
+        if (this.isValidCoordinate(other)) {
+            return distanceTwoLocations(this.location, other)
+        }
+        throw new Error('Invalid GPS coordinate');        
+    }
+
+    private isValidCoordinate(other: GPSCoordinate) {
+        return (other.latitude < 90 && other.latitude > -90) ||
+            (other.longitude < 180 && other.longitude > -180);
     }
 }
 
