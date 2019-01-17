@@ -3,15 +3,17 @@
   "version": "0.0.0",
   "name": "ffecp",
   "dependencies": {
-    "@types/node": "^10.12.12"
   },
   "devDependencies": {
+    "@types/node": "^10.12.12",
     "@types/csv-parse": "^1.1.11",
     "@types/fs-extra": "^5.0.4",
     "@types/jest": "^23.1.1",
+    "csv-loader": "^3.0.2",
     "csv-parse": "^4.1.0",
     "fs-extra": "^7.0.1",
     "jest": "^23.6.0",
+    "papaparse": "^4.6.3",
     "ts-jest": "*",
     "ts-loader": "^5.3.1",
     "typescript": "^3.2.2",
@@ -24,11 +26,6 @@
     "test": "jest --env=node --colors --coverage test"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
     "transform": {
       "^.+\\.(ts|tsx)$": "ts-jest"
     },
@@ -37,12 +34,9 @@
         "tsConfigFile": "tsconfig.json"
       }
     },
-    "testMatch": [
-      "**/__tests__/*.+(ts|tsx|js)"
-    ],
-    "moduleNameMapper": {
-      "^@App/(.*)$": "<rootDir>/src/main/$1",
-      "^lib/(.*)$": "<rootDir>/common/$1"
-    }
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testPathIgnorePatterns": ["/lib/", "/node_modules/"],
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node", "csv"],
+    "collectCoverage": true
   }
 }

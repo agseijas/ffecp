@@ -9,6 +9,12 @@ module.exports = {
         use: 'ts-loader',
         include: /src/,
         exclude: /node_modules/
+      },
+      {
+        test: /\.(csv|tsv)$/,
+        use: [
+          'csv-loader'
+        ]
       }
     ]
   },

@@ -1,18 +1,18 @@
-import { AirportsLoader } from '../src/main/ts/app/airports-loader';
+import { EmbeddedCSVAirportsService } from './../src/main/ts/app/airports-service';
 import { Airport } from '../src/main/ts/app/app';
 
 describe("IATA airports to gps coordinates list", () => {
     
     test("Airports are asynchronously loaded from csv file", done => {
-        const airportsLoader = new AirportsLoader()
 
         const expectLoadsAirportCallback: (airportsMap: Map<String, Airport>) => void = airports => {
             done();
             const newLocal = airports.get("MAD");
             expect(newLocal).toEqual(new Airport({ altitude: 610, latitude: 40.472, longitude: -3.561 }));
         };
+        const airports = new EmbeddedCSVAirportsService('./../src/main/resources/iata-airports.csv')
 
-        airportsLoader.load(expectLoadsAirportCallback)
+        airports.loadAsync(expectLoadsAirportCallback)
     });
 
     /*

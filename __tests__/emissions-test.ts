@@ -1,10 +1,11 @@
+import { EmbeddedCSVAirportsService } from './../src/main/ts/app/airports-service';
 import { Flight } from '../src/main/ts/app/flights';
-import { AirportsLoader, AirportLoadCallback } from '../src/main/ts/app/airports-loader';
+import { AirportLoadCallback } from '../src/main/ts/app/airports-service';
 
 describe("calc milleage for GPS coordinates", () => {
+    const airports = new EmbeddedCSVAirportsService('./../src/main/resources/iata-airports.csv')
 
     test("Same location", done => {
-        const airportsLoader = new AirportsLoader()
 
         const airportsAndCheck : AirportLoadCallback = airports => {
             done();
@@ -18,11 +19,10 @@ describe("calc milleage for GPS coordinates", () => {
             }
         };
 
-        airportsLoader.load(airportsAndCheck)
+        airports.loadAsync(airportsAndCheck)
     });
 
     test("Madrid Paris distance", done => {
-        const airportsLoader = new AirportsLoader()
 
         const airportsAndCheck : AirportLoadCallback = airports => {
             done();
@@ -37,6 +37,6 @@ describe("calc milleage for GPS coordinates", () => {
             }
         };
 
-        airportsLoader.load(airportsAndCheck)
+        airports.loadAsync(airportsAndCheck)
     });
 })
