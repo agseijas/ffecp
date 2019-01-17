@@ -17,7 +17,7 @@ export class FileSystemCSVAirportsService implements AirportService{
 
     public loadAsync(seedAirports: AirportLoadCallback){
         const parser = parse({ delimiter: ':'});
-        let allAirports = "";
+        const airports = new Map<String, Airport>()
         createReadStream(this.filePath, {encoding: 'utf8'})
             .pipe(parser)
             .on('data', record => {
@@ -26,31 +26,20 @@ export class FileSystemCSVAirportsService implements AirportService{
                 const lat = record[14] as number
                 const lon = record[15] as number
                 if(code !== 'N/A' && !(lat == 0 && lon == 0)){
-                    //const iataGPSLocations = [{ "MAD": [0,0,0]}]
-                    const iataGPSLocations = code + ';' + alt + ';' + lat + ';' + lon
-                    allAirports += iataGPSLocations + '\n'
+                    const adaptedGPSLocation = adapt([code,alt,lat,lon]);
+                    //allAirports += iataGPSLocations + '\n'
+                    airports.set(code, new Airport(adaptedGPSLocation))
                 }
             })
             .on('finish', () => {
-                const reparser = parse(allAirports, { delimiter: ";", trim: true, skip_empty_lines: true });
-                const airports = new Map<String, Airport>()
-        
-                reparser
-                    .on('data', record => {
-                        const { code, alt, lat, lon } = adapt(record);
-                        airports.set(code, new Airport({altitude: alt, latitude: lat, longitude: lon}))
-                    })
-                    .on('finish', () => {
-                        seedAirports(airports)
-                    })
+                seedAirports(airports)
             })
     }
 }
 
 function adapt(record: any) {
-    const code = record[0];
     const alt = Number.parseFloat(record[1]);
     const lat = Number.parseFloat(record[2]);
     const lon = Number.parseFloat(record[3]);
-    return { code, alt, lat, lon };
+    return {altitude: alt, latitude: lat, longitude: lon};
 }
