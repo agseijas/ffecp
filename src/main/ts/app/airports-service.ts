@@ -1,6 +1,6 @@
 import { Airport } from './app';
 import parse from 'csv-parse';
-import { createReadStream } from 'fs';
+import { createReadStream, existsSync } from 'fs';
 
 export type AirportLoadCallback = (airportsMap: Map<String, Airport>) => void
 
@@ -8,7 +8,7 @@ interface AirportService {
     loadAsync(seedAirports: AirportLoadCallback): void
 }
 
-export class EmbeddedCSVAirportsService implements AirportService{
+export class FileSystemCSVAirportsService implements AirportService{
     private filePath: string;
 
     constructor (csvPath: string) {
@@ -18,7 +18,7 @@ export class EmbeddedCSVAirportsService implements AirportService{
     public loadAsync(seedAirports: AirportLoadCallback){
         const parser = parse({ delimiter: ':'});
         let allAirports = "";
-        const airportsStream = createReadStream(this.filePath, {encoding: 'utf8'})
+        createReadStream(this.filePath, {encoding: 'utf8'})
             .pipe(parser)
             .on('data', record => {
                 const code = record[1] as String
@@ -26,8 +26,8 @@ export class EmbeddedCSVAirportsService implements AirportService{
                 const lat = record[14] as number
                 const lon = record[15] as number
                 if(code !== 'N/A' && !(lat == 0 && lon == 0)){
-                    const iataGPSLocations = [{ "MAD": [0,0,0]}]
-                    //const iataGPSLocations = code + ';' + alt + ';' + lat + ';' + lon
+                    //const iataGPSLocations = [{ "MAD": [0,0,0]}]
+                    const iataGPSLocations = code + ';' + alt + ';' + lat + ';' + lon
                     allAirports += iataGPSLocations + '\n'
                 }
             })
@@ -43,7 +43,7 @@ export class EmbeddedCSVAirportsService implements AirportService{
                     .on('finish', () => {
                         seedAirports(airports)
                     })
-            });
+            })
     }
 }
 
