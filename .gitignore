@@ -8,3 +8,4 @@ coverage
 target/
 out/
 dist/
+dist_node/

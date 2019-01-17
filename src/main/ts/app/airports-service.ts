@@ -1,6 +1,6 @@
 import { Airport } from './app';
 import parse from 'csv-parse';
-import { createReadStream, existsSync } from 'fs';
+import { createReadStream } from 'fs';
 
 export type AirportLoadCallback = (airportsMap: Map<String, Airport>) => void
 
