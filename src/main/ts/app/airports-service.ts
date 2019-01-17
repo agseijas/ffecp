@@ -10,7 +10,7 @@ interface AirportService {
 
 type IATAAirport = {code: string, alt: string, lat: string, lon: string}
 
-export class FileSystemCSVAirportsService implements AirportService{
+export class FileSystemCSVAirportsService implements AirportService{ 
     private filePath: string;
 
     constructor (csvPath: string) {
