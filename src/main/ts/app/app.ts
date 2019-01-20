@@ -22,7 +22,7 @@ export class Airport implements GPSLocation{
     }
 
     private isValidCoordinate(other: GPSCoordinate) {
-        return (other.latitude < 90 && other.latitude > -90) ||
+        return (other.latitude < 90 && other.latitude > -90) &&
             (other.longitude < 180 && other.longitude > -180);
     }
 }

@@ -15,9 +15,18 @@ describe("calc milleage for GPS coordinates", () => {
         expect(MAD.distanceTo(CDG_AIRPORT_GPS_LOCATION)).toBeCloseTo(1062.4, 1);
     });
 
-    test("Invalid GPS coordinate", () => {
+    test("Invalid excessive GPS coordinate", () => {
         let anAirport = new Airport(MAD_AIRPORT_GPS_LOCATION)
         const invalidGPSLocation = {latitude: 50000, longitude: 500000, altitude: 10000}
+        expect(() => {
+            anAirport.distanceTo(invalidGPSLocation)
+        })
+        .toThrowError("Invalid GPS coordinate");
+    });
+
+    test("Invalid too short GPS coordinate", () => {
+        let anAirport = new Airport(MAD_AIRPORT_GPS_LOCATION)
+        const invalidGPSLocation = {latitude: -80, longitude: -190, altitude: 10000}
         expect(() => {
             anAirport.distanceTo(invalidGPSLocation)
         })
