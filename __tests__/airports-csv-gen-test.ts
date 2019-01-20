@@ -1,4 +1,5 @@
-import { FileSystemCSVAirportsService } from './../src/main/ts/app/airports-service';
+import { FileSystemCSVAirportsService } from './../src/main/ts/app/airports-CSV-parser';
+
 import { Airport } from '../src/main/ts/app/app';
 
 describe("IATA airports to gps coordinates list", () => {

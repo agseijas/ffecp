@@ -1,6 +1,7 @@
-import { FileSystemCSVAirportsService } from './../src/main/ts/app/airports-service';
+
 import { Flight } from '../src/main/ts/app/flights';
 import { AirportLoadCallback } from '../src/main/ts/app/airports-service';
+import { FileSystemCSVAirportsService } from '../src/main/ts/app/airports-CSV-parser';
 
 describe("calc milleage for GPS coordinates", () => {
     const airports = new FileSystemCSVAirportsService('./src/main/resources/iata-airports.csv')
