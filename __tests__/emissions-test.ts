@@ -19,7 +19,7 @@ describe("calc milleage for GPS coordinates", () => {
             }
         };
 
-        airports.loadAsync(airportsAndCheck)
+        airports.loadAirportsAsync(airportsAndCheck)
     });
 
     test("Madrid Paris distance", done => {
@@ -37,6 +37,6 @@ describe("calc milleage for GPS coordinates", () => {
             }
         };
 
-        airports.loadAsync(airportsAndCheck)
+        airports.loadAirportsAsync(airportsAndCheck)
     });
 })

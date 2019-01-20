@@ -12,7 +12,7 @@ describe("IATA airports to gps coordinates list", () => {
         };
         const airports = new FileSystemCSVAirportsService('./src/main/resources/iata-airports.csv')
 
-        airports.loadAsync(expectLoadsAirportCallback)
+        airports.loadAirportsAsync(expectLoadsAirportCallback)
     });
 
     /*

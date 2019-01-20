@@ -6,13 +6,13 @@ export interface GPSLocation {
     distanceTo(other: GPSCoordinate): DistanceInKm
 }
 
-export class Airport implements GPSLocation{
+export class Airport implements GPSLocation {
     location: GPSCoordinate
 
     constructor(location: GPSCoordinate) {
         this.location = location
     }
-
+ 
     public distanceTo(other: GPSCoordinate): DistanceInKm {
         
         if (this.isValidCoordinate(other)) {
