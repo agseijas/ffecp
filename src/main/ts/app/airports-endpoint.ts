@@ -2,23 +2,23 @@ import { Airport } from './app';
 import { AirportService, AirportLoadCallback } from "./airports-service";
 
 export class AirportsEndpointService implements AirportService {
-    private airportsJSON = '[{"code":"MAD","altitude":610,"latitude":40.472,"longitude":-3.561}]'
-
+    
     loadAirportsAsync(loadedAirports: AirportLoadCallback): void {
         let airportsMap = new Map<String, Airport>();
 
-        let airportsList : AirportJSON[]= JSON.parse(this.getAirportsFromEndpoint())
+        this.getAirportsFromEndpoint().then(airportsJSONList => {
+            let airportsList : AirportJSON[]= JSON.parse(airportsJSONList)
 
-        airportsList.map(airport => {
-            airportsMap.set(airport.code, this.adapt(airport));
-        });
-
-        loadedAirports(airportsMap);
+            airportsList.map(airport => {
+                airportsMap.set(airport.code, this.adapt(airport));
+            });
+    
+            loadedAirports(airportsMap);
+        })
     }
 
-
-    private getAirportsFromEndpoint(): string {
-        return this.airportsJSON;
+    private getAirportsFromEndpoint(): Promise<string> {
+        return fetch('/airports').then(res => res.text());
     }
 
     private adapt(airport: AirportJSON): Airport {
