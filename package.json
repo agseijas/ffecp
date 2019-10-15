@@ -11,7 +11,7 @@
     "@types/fs-extra": "^5.0.4",
     "@types/jest": "^23.3.12",
     "csv-loader": "^3.0.2",
-    "csv-parse": "^4.3.0",
+    "csv-parse": "^4.4.6",
     "jest": "^23.6.0",
     "jest-fetch-mock": "^2.1.0",
     "papaparse": "^4.6.3",
